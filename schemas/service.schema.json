@@ -1,0 +1,64 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/bonsai/Observability/blob/main/schemas/service.schema.json",
+  "title": "Observability Service",
+  "description": "A service or destination listed in an integration catalog. Listing does not imply live connection or independently verified provider capabilities.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "id",
+    "name",
+    "vendor",
+    "category",
+    "source",
+    "verification_status",
+    "openrouter_destination_id"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+    },
+    "name": {
+      "type": "string",
+      "minLength": 1
+    },
+    "vendor": {
+      "type": "string",
+      "minLength": 1
+    },
+    "category": {
+      "type": "string",
+      "minLength": 1
+    },
+    "source": {
+      "type": "string",
+      "minLength": 1
+    },
+    "verification_status": {
+      "type": "string",
+      "enum": [
+        "listed",
+        "documented",
+        "tested",
+        "deprecated"
+      ]
+    },
+    "openrouter_destination_id": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "website": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "uri"
+    },
+    "notes": {
+      "type": "string"
+    }
+  }
+}

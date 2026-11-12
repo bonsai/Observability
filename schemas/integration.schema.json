@@ -1,0 +1,115 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/bonsai/Observability/blob/main/schemas/integration.schema.json",
+  "title": "Observability Integration",
+  "description": "A platform-specific integration record. Listed status is not evidence of a successful connection.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "id",
+    "service_id",
+    "platform",
+    "integration_type",
+    "availability_status",
+    "configuration_schema_status",
+    "setup_fields",
+    "source",
+    "verification_status"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+    },
+    "service_id": {
+      "type": "string"
+    },
+    "platform": {
+      "type": "string"
+    },
+    "integration_type": {
+      "type": "string",
+      "enum": [
+        "native_destination",
+        "custom_destination"
+      ]
+    },
+    "availability_status": {
+      "type": "string",
+      "enum": [
+        "listed",
+        "available",
+        "unavailable",
+        "deprecated",
+        "unknown"
+      ]
+    },
+    "configuration_schema_status": {
+      "type": "string",
+      "enum": [
+        "not_documented",
+        "partially_observed",
+        "documented",
+        "tested"
+      ]
+    },
+    "setup_fields": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "name",
+          "required",
+          "secret"
+        ],
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "required": {
+            "type": "boolean"
+          },
+          "secret": {
+            "type": "boolean"
+          },
+          "secret_may_be_present": {
+            "type": "boolean"
+          },
+          "storage": {
+            "type": "string",
+            "enum": [
+              "secret_reference_only"
+            ]
+          },
+          "format": {
+            "type": "string"
+          },
+          "default": {
+            "type": [
+              "string",
+              "number",
+              "boolean",
+              "null"
+            ]
+          }
+        }
+      }
+    },
+    "source": {
+      "type": "string"
+    },
+    "verification_status": {
+      "type": "string",
+      "enum": [
+        "listed",
+        "documented",
+        "tested",
+        "deprecated"
+      ]
+    },
+    "notes": {
+      "type": "string"
+    }
+  }
+}

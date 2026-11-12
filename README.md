@@ -32,5 +32,12 @@ Integration row: `openrouter-langfuse` in `data/integrations.jsonl` (`verificati
 
 - Live-verify Langfuse Broadcast (`live_trace`, `cost_ok`)
 - Provider-specific connection schemas for remaining destinations
+- Authentication and endpoint metadata (secret references only)
+- Supported regions and payload fields
 - Privacy, sampling, and filtering capabilities matrix
-- Optional export path to analysis (e.g. yukidaruma CSV)
+- Integration tests and compatibility notes
+- Optional export path to analysis — the self-hosted plan below is one such path (yukidaruma CSV as one format)
+
+## Plan: self-hosted analysis on Kaggle
+
+- [docs/observability-plan.md](./docs/observability-plan.md) — OpenRouter Observability を参考に、転送ではなく**データを手元に保持したまま Kaggle で分析する**計画（llm_requests / balance_snapshots / model_catalog）。destination カタログ（本 repo の data/）は将来の転送先候補。

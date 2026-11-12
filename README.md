@@ -2,11 +2,24 @@
 
 A structured catalog of observability and telemetry services, starting with the destinations available in OpenRouter.
 
+## Langfuse (priority sink)
+
+Primary LLM observability design for OpenRouter traffic:
+
+- [docs/langfuse-design.md](docs/langfuse-design.md) — Broadcast + SDK, privacy, cost, hamachi boundary
+- [docs/langfuse-setup-checklist.md](docs/langfuse-setup-checklist.md) — operator steps
+- Workspace logs (vendor UI): https://openrouter.ai/workspaces/default/logs
+
+Integration row: `openrouter-langfuse` in `data/integrations.jsonl` (`verification_status: documented` — not live-tested in-repo).
+
 ## Data
 
-- `data/openrouter-destinations.jsonl`: one JSON object per line; initial inventory of 21 destinations shown in the OpenRouter Observability UI.
+- `data/openrouter-destinations.jsonl`: one JSON object per line; initial inventory of destinations shown in the OpenRouter Observability UI.
+- `data/services.jsonl`: service inventory.
+- `data/integrations.jsonl`: platform × service integration records.
 - `beta` records whether the destination was marked Beta in the captured UI.
 - `verification_status: listed` means the destination was visible in the UI; it does not imply that credentials, endpoints, payload fields, or a live connection have been independently tested.
+- `verification_status: documented` means setup fields were filled from public provider/OpenRouter docs; still not a substitute for a live connection test.
 
 ## Data policy
 
@@ -17,8 +30,7 @@ A structured catalog of observability and telemetry services, starting with the 
 
 ## Planned extensions
 
-- Provider-specific connection schemas
-- Authentication and endpoint metadata (secret references only)
-- Supported regions and payload fields
-- Privacy, sampling, and filtering capabilities
-- Integration tests and compatibility notes
+- Live-verify Langfuse Broadcast (`live_trace`, `cost_ok`)
+- Provider-specific connection schemas for remaining destinations
+- Privacy, sampling, and filtering capabilities matrix
+- Optional export path to analysis (e.g. yukidaruma CSV)

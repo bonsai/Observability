@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="256" viewBox="0 0 760 256" font-family="'Hiragino Sans','Yu Gothic','Meiryo',sans-serif">
+<rect width="760" height="256" fill="#ffffff"/>
+<text x="192" y="30" font-size="17" font-weight="bold" fill="#222">民謡自治体貢献度通知表（サンプル）</text>
+<text x="192" y="72" font-size="13" text-anchor="end" fill="#333">サンプル市A</text>
+<rect x="200" y="58" width="460.0" height="18" rx="3" fill="#2F5FA8"/>
+<text x="666.0" y="72" font-size="12" fill="#555">88点</text>
+<text x="192" y="102" font-size="13" text-anchor="end" fill="#333">サンプル市B</text>
+<rect x="200" y="88" width="386.8" height="18" rx="3" fill="#4A78C2"/>
+<text x="592.8" y="102" font-size="12" fill="#555">74点</text>
+<text x="192" y="132" font-size="13" text-anchor="end" fill="#333">サンプル町C</text>
+<rect x="200" y="118" width="318.9" height="18" rx="3" fill="#4A78C2"/>
+<text x="524.9" y="132" font-size="12" fill="#555">61点</text>
+<text x="192" y="162" font-size="13" text-anchor="end" fill="#333">サンプル市D</text>
+<rect x="200" y="148" width="287.5" height="18" rx="3" fill="#4A78C2"/>
+<text x="493.5" y="162" font-size="12" fill="#555">55点</text>
+<text x="192" y="192" font-size="13" text-anchor="end" fill="#333">サンプル町E</text>
+<rect x="200" y="178" width="224.8" height="18" rx="3" fill="#4A78C2"/>
+<text x="430.8" y="192" font-size="12" fill="#555">43点</text>
+<text x="192" y="222" font-size="13" text-anchor="end" fill="#333">サンプル村F</text>
+<rect x="200" y="208" width="156.8" height="18" rx="3" fill="#4A78C2"/>
+<text x="362.8" y="222" font-size="12" fill="#555">30点</text>
+</svg>

@@ -31,6 +31,22 @@
 - **MVP: Langfuse でデータ可視化・インサイト取得** — destination カタログ（data/）に Langfuse の setup_fields 済み（integrations.jsonl 参照：baseUrl / publicKey / secretKey / privacy_mode ほか）。OpenRouter の destination 設定を 1 つ行えば自前 collector 不要で可視化が始まる
 - **POC: CSV → GDrive / py + GH wf / SVG + dataview.js on GH** — ファイル進化計画のツール群（tools/）と同型。データは手元保持
 
+### 可視化 / UI レイヤ（2026-11-13 追加 — GAS + AppSheet）
+
+| レイヤ | ツール | 役割 |
+|---|---|---|
+| 収集・転送 | **GAS**（時間/onChange トリガー） | Drive の evolution JSONL → Sheets 書き出し / Langfuse ingestion POST（UrlFetchApp） |
+| 保持 | Google Sheets / Drive | 集計テーブル（AppSheet のソース）＋生 JSONL |
+| 閲覧（no-code） | **AppSheet** | Sheets を読むモバイル/web アプリ — 通知表・ダッシュボードの「見る側」。コード不要 |
+| 閲覧（LLM 特化） | Langfuse | LLM 観測のトレース・コスト・セッション分析 |
+| 閲覧（自作） | vanilla JS + SVG on GH Pages（dataview.js） | 通知表・レポート（yukidaruma ADR-002 制約と整合） |
+
+データフロー: `evolution/*.jsonl`（Drive）→ **GAS** → Sheets → **AppSheet**（モバイル閲覧）／ **Langfuse**（LLM 分析）／ GH Pages **SVG**（通知表）
+
+- AppSheet は free tier で prototype・個人利用可（≤10 ユーザー）
+- GAS は 6 分/実行・UrlFetchApp 20k/day — 転送用途には十分。重い分析は max ティア（Kaggle）のまま
+- Langfuse ブリッジ経由なら **OpenRouter Management key 不要**（Langfuse 鍵のみで Drive のデータを直接 POST — integrations 調査で判明した 401 問題を回避）
+
 ### ngrok / OpenTunnel（topology.yaml 2026-11-12 確定）
 
 - **OpenTunnel = opencode のペアリング/トンネル機能**（`bin/pair-qr.ps1` の opencode pair フロー）。別サービスではない

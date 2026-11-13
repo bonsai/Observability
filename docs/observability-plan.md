@@ -31,6 +31,16 @@
 - **MVP: Langfuse でデータ可視化・インサイト取得** — destination カタログ（data/）に Langfuse の setup_fields 済み（integrations.jsonl 参照：baseUrl / publicKey / secretKey / privacy_mode ほか）。OpenRouter の destination 設定を 1 つ行えば自前 collector 不要で可視化が始まる
 - **POC: CSV → GDrive / py + GH wf / SVG + dataview.js on GH** — ファイル進化計画のツール群（tools/）と同型。データは手元保持
 
+### ロードマップ（2026-11-13 ユーザー確定 — 3 つの名前付きデリバラブル）
+
+| フェーズ | デリバラブル | 中身 | 状態 |
+|---|---|---|---|
+| **POC** | **csv2svg** | CSV → SVG 変換パイプライン（py + GH wf / GH Pages）。最初のアプリ = 民謡自治体貢献度通知表 | **次に作る** |
+| **MVP** | **observability**（本 repo） | Langfuse + GAS + AppSheet + Sheets の観測基盤（llm_requests / balance_snapshots / model_catalog） | 計画済み（本書） |
+| **MAX** | **yukidaruma** | 計算倉庫本体（Workers + D1 + Google Drive + Muse VM Python worker + Kaggle/Colab） | Phase 0 設計済み（ADR-001/002） |
+
+依存順: **POC（csv2svg）が最初** — ここで確立した SVG 出力の型（vanilla JS + SVG 制約）が MVP/MAX の可視化にも流用される。
+
 ### 可視化 / UI レイヤ（2026-11-13 追加 — GAS + AppSheet）
 
 | レイヤ | ツール | 役割 |

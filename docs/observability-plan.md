@@ -7,6 +7,39 @@
 
 ---
 
+## 0. 確定（2026-11-13 ユーザー）— 分析ターゲット 3 つとティア構造
+
+### 分析ターゲット（観測基盤の適用先）
+
+1. **OpenRouter 使用履歴データ分析** — 本計画の本体（llm_requests / balance / model_catalog）
+2. **bonsai repo 分析** — ファイル進化計画（#396）と接続：repo_snapshots / file_manifests / events
+3. **民謡自治体貢献度通知表**（新規）— 民謡 × 自治体の貢献度を SVG 通知表として可視化。vanilla JS + SVG 制約（yukidaruma ADR-002）と整合する最初の具体的ユースケース
+
+### ティア構造（ユーザー確定）
+
+| ティア | 計算 | ストレージ | 形式 |
+|---|---|---|---|
+| **max** | Kaggle | Cloudflare D1 / R2 | JSONL / SQLite / **Parquet（要確認 → 後述）** |
+| **colab** | Colab | Google Drive | CSV / JSONL |
+| **poc** | py + GH wf | GitHub（data/ + Pages） | CSV / SVG / dataview.js |
+
+- **Parquet は max ティアの分析形式として適切**（列指向・Kaggle/DataFrame native）。正（canonical）は JSONL のまま、Parquet は分析用派生
+- SQLite は処理エンジン（進化計画と同じ規約）
+
+### MVP / POC の切れ分け（ユーザー確定）
+
+- **MVP: Langfuse でデータ可視化・インサイト取得** — destination カタログ（data/）に Langfuse の setup_fields 済み（integrations.jsonl 参照：baseUrl / publicKey / secretKey / privacy_mode ほか）。OpenRouter の destination 設定を 1 つ行えば自前 collector 不要で可視化が始まる
+- **POC: CSV → GDrive / py + GH wf / SVG + dataview.js on GH** — ファイル進化計画のツール群（tools/）と同型。データは手元保持
+
+### ngrok / OpenTunnel（topology.yaml 2026-11-12 確定）
+
+- **OpenTunnel = opencode のペアリング/トンネル機能**（`bin/pair-qr.ps1` の opencode pair フロー）。別サービスではない
+- OpenCode v2 のリモート入口（port 49375）: **OpenTunnel または ngrok opencode トンネルの二択が台帳に定義済み** → OpenTunnel で ngrok は置換可能
+- muse-bridge（port 8765、muse-crx の /ext relay）は**別用途** — yukidaruma の outbound-poll 設計に寄せると不要化する
+- LLM 観測基盤にトンネルは無関係（OpenRouter 経由は cloud → cloud）
+
+---
+
 ## 0. この repo との関係 — 転送先カタログ vs 自前分析
 
 この repo の `data/*.jsonl`（21 destinations）は、OpenRouter Observability UI で確認できる**観測データの転送先**（SaaS）カタログである:
